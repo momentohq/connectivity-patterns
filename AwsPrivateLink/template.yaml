@@ -1,0 +1,51 @@
+Parameters:
+  MomentoServiceName:
+    Type: String
+    Description: The service name of the Momento vpc endpoint. This is given to you by a Momento engineer.
+  MomentoHttpServiceName:
+    Type: String
+    Default: None
+    Description: "[Optional] The service name of the Momento HTTP vpc endpoint. This is given to you by a Momento engineer."
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: The IDs of subnets in which to create an endpoint network interface
+  SecurityGroupIds:
+    Type: List<AWS::EC2::SecurityGroup::Id>
+    Description: The IDs of security groups to associate with the endpoint network interface
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The ID of the VPC in which the endpoint will be used
+Resources:
+  MomentoServiceVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      ServiceName:
+        Ref: MomentoServiceName
+      VpcId:
+        Ref: VpcId
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+        Ref: SecurityGroupIds
+      SubnetIds:
+        Ref: SubnetIds
+      VpcEndpointType: Interface
+  MomentoServiceHttpVpcEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      ServiceName:
+        Ref: MomentoHttpServiceName
+      VpcId:
+        Ref: VpcId
+      PrivateDnsEnabled: true
+      SecurityGroupIds:
+        Ref: SecurityGroupIds
+      SubnetIds:
+        Ref: SubnetIds
+      VpcEndpointType: Interface
+    Condition: CreateHttpVpcEndpointCondition
+Conditions:
+  CreateHttpVpcEndpointCondition:
+    Fn::Not:
+      - Fn::Equals:
+          - Ref: MomentoHttpServiceName
+          - None
