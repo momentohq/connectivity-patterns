@@ -24,7 +24,10 @@ Before starting, ensure that:
    Once your account is approved, Momento Support will provide you with a `MomentoServiceName`. This value is required
    for creating and configuring your VPC Endpoint.
 
-3. **Provision the VPC Endpoint**  
+   ***Note:** If you need to enable our HTTP endpoint enabled via private link please specify this when reaching out and
+    you will recieve a value for `MomentoHttpServiceName` parameter as well to pass in when provisioning also.* 
+
+4. **Provision the VPC Endpoint**  
    You can use the example configurations provided to simplify the deployment:
     - **CloudFormation**: Use the [CloudFormation template](./template.yaml) to provision the VPC Endpoint within your
       AWS environment.
