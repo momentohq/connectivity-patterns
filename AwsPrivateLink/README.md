@@ -5,7 +5,7 @@ this integration, you can securely connect to Momento services within your AWS e
 private and protected.
 
 For a detailed overview of AWS Private Link and its benefits with Momento, refer to
-our [official documentation](https://docs.momentohq.com/cache/learn/security/private-link).
+our [official documentation](https://docs.momentohq.com/platform/connectivity/private-link).
 
 ## Prerequisites
 
